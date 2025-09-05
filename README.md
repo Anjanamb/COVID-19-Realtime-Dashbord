@@ -1,37 +1,118 @@
-# IOT_Project-COVID_19_Realtime_Dashbord
-Real-time COVID-19 dashboard that makes effective use of IoT concepts, NodeRED, MQTT, and ESP8266 Nodemcu.
+# COVID‑19 Realtime Dashboard
 
-Project Title: Combating Covid-19 with IoT 
+> A real-time IoT-powered COVID‑19 dashboard built using Node‑RED, MQTT, and ESP8266 (NodeMCU), designed to track global and Sri Lankan COVID‑19 statistics.
 
-As the fight against COVID-19 continues, monitoring the pandemic’s progress has become a top priority. IoT revolution is reshaping modern healthcare systems by incorporating technological, economic, and social prospects. IoT-enabled/linked devices/applications are utilized to lower the possible spread of COVID-19 to others by early diagnosis, monitoring patients, and practicing defined protocols after patient recovery. By this project we intend to get statistics throughout the world mainly focusing on Sri Lanka.
+---
 
-• Keep updated database about the covid-19 details in Sri Lanka daily (Daily and Total number of new cases, number of deaths, number of recovered patients)
+## Table of Contents
 
-• Keep updated database about the global covid-19 details daily (Daily and Total number of new cases, number of deaths, number of recovered patients)
+- [Overview](#overview)  
+- [Features](#features)  
+- [Setup & Quickstart](#setup--quickstart)  
+- [Architecture & Components](#architecture--components)  
+- [Customization](#customization)  
+- [License](#license)  
+- [Contact](#contact)
 
-• Get the total number of Sri Lankans, foreigners who have been treated and currently on treatment in a given hospital in Sri Lanka
+---
 
-• Get the Covid-19 statistics (Daily and Total number of new cases, number of deaths, number of recovered patients)
+## Overview
 
-Data Sources
+This project provides a **real-time COVID‑19 dashboard** that leverages IoT principles to monitor pandemic trends, with a primary focus on Sri Lanka alongside global data. It functions through:
 
-1) Coronavirus COVID19 API (getpostman.com)
-Provides current real time situation of the COVID-19 patients reported in separate countries throughout the world. 2) https://www.hpb.health.gov.lk Provides the current real time situation of the COVID-19 patients reported in Sri Lanka.
+- Smart data aggregation from public APIs  
+- IoT communication using **MQTT**  
+- Interactive UI via **Node‑RED** dashboards  
+- Client display powered by **ESP8266 (NodeMCU)**, serving as a localized server interface
 
-Components
+This channelized setup enables live monitoring on both dashboards and physical IoT endpoints.
 
-➢ Open source API: To get required data.
+---
 
-➢ Node-red: To design the dashboard displaying corresponding data using the received data through APIs. To work as a MQTT Publisher.
+## Features
 
-➢ MQTT Broker: To filter messages based on topic, and then distribute them to subscribers.
+- **Daily and cumulative COVID data** for global and Sri Lankan stats (cases, recoveries, deaths)  
+- **IoT integration** using:
+  - **Node‑RED**: Data orchestration & dashboard creation  
+  - **MQTT Broker**: Messaging middleware for real-time updates  
+  - **ESP8266 (NodeMCU)**: Hosts a local access point with server webpage for mobile/IoT clients  
 
-➢ Node MCU: To work as a MQTT subscriber. To form an access point(server) and server webpage.
+---
 
-➢ Mobile (Client): To get the latest information through the server webpage.
+## Setup & Quickstart
 
-System functions and features
+1. **Clone the Repository**
+   ```bash
+   git clone https://github.com/Anjanamb/COVID-19-Realtime-Dashbord.git
+   cd COVID-19-Realtime-Dashbord
+   ```
 
-➢ A Node-red dashboard displaying all the intended information.
+2. **Install & Launch Node‑RED**
+   - Ensure Node.js and Node‑RED are installed.
+   - Run:
+     ```bash
+     node-red
+     ```
+   - Import the project's `flows.json` flow into Node‑RED.
 
-➢ A server webpage (URL) displaying all the important and relevant information.
+3. **Configure the MQTT Broker**
+   - Use a local or cloud-based MQTT broker.
+   - Confirm Node‑RED flows point to the correct broker endpoint.
+
+4. **Flash the ESP8266**
+   - Deploy the ESP8266 client code to your NodeMCU module.
+   - The module should connect to your Wi-Fi and subscribe to MQTT topics.
+
+5. **Access the Dashboard**
+   - Open the Node‑RED dashboard in a browser via `http://localhost:1880/ui` (default port) or as configured.
+   - Access ESP8266 dashboard via its generated hotspot or served IP.
+
+---
+
+## Architecture & Components
+
+```
+[ Public COVID APIs ]
+         ↓
+     Node‑RED (flows.json)
+         ↓ (via MQTT)
+   ┌────────────┐     ┌──────────────┐
+   │  Node‑RED  │     │  ESP8266     │
+   │ Dashboard  │     │ Local Server │
+   └────────────┘     └──────────────┘
+         ↓                   ↓
+     Web Browser         Mobile Client
+```
+
+- **Node‑RED**:
+  - Orchestrates data fetching, processing, and UI display.
+- **MQTT Broker**:
+  - Connects Node‑RED and ESP8266 via publish/subscribe topics.
+- **ESP8266 (NodeMCU)**:
+  - Acts as both an MQTT subscriber and a local web server for mobile access.
+
+---
+
+## Customization
+
+- **Add New Data Sources**:
+  - Modify Node‑RED flows to fetch additional APIs or data endpoints.
+- **Extend ESP8266 UI**:
+  - Upgrade the served webpage on the NodeMCU with richer analytics or new display components.
+- **Deploy Remotely**:
+  - Host MQTT or Node‑RED dashboards on Raspberry Pi or cloud VMs for broader access.
+
+---
+
+## License
+
+This project is open‑source under the **MIT License**.
+
+---
+
+## Contact
+
+- **Author**: Anjana Bandara (`Anjanamb`)  
+- Built using IoT tools like Node‑RED, MQTT, and ESP8266.
+
+---
